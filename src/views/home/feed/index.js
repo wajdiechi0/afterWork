@@ -3,6 +3,6 @@ import './feed.css';
 
 export default class FeedComponent extends Component{
     render() {
-        return <div>Hello feed</div>
+        return <div style={{backgroundColor:"#e6e6e6"}}>Hello feed</div>
     }
 };

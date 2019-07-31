@@ -1,5 +1,8 @@
 import LoginComponent from './login';
-
+import SignUpComponent from './signup';
+import ResetPasswordComponent from './resetPassword'
 export {
-    LoginComponent
+    LoginComponent,
+    SignUpComponent,
+    ResetPasswordComponent
 };

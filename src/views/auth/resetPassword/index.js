@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
-import './login.css';
-import {TextField, Button} from '@material-ui/core'
-import facebook from './../../../assets/fb.png';
-
-export default class LoginComponent extends Component {
+import './resetPassword.css';
+import {Button, TextField} from "@material-ui/core";
+import facebook from "../../../assets/fb.png";
+import Lock from "@material-ui/icons/Lock"
+export default class ResetPasswordComponent extends Component{
     render() {
         return <div className={'container'}>
             <div className={'formContainer'}>
+                <Lock stylòe/>
                 <h1 className={'title'}>AfterWork</h1>
                 <TextField
                     id="outlined-dense"
@@ -24,7 +25,7 @@ export default class LoginComponent extends Component {
                     className={'input'}
 
                 />
-                <Button href={'/resetpassword'} style={{fontWeight: 'bold', color: '#3897f0'}}> Forgot Password
+                <Button href={'/resetPassword'} style={{fontWeight: 'bold', color: '#3897f0'}}> Forgot Password
                     ?</Button>
                 <Button variant="contained" color="primary"
                         style={{width: '80%', backgroundColor: '#3897f0', fontWeight: 'bold'}}>
@@ -43,7 +44,7 @@ export default class LoginComponent extends Component {
             </div>
             <div className={'signUpCont'}>
                 <p>Don't have an account ?</p>
-                <Button href={'/signup'} style={{fontWeight: 'bold', color: '#3897f0'}}>
+                <Button href={'/signUp'} style={{fontWeight: 'bold', color: '#3897f0'}}>
                     Sign Up !
                 </Button>
             </div>
