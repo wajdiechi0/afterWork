@@ -1,7 +1,7 @@
-import SettingsComponent from './settings';
+import SettingsComponent from './components/personalProfileHeader/settings';
 import PersonalProfileCompenent from './personalProfile';
-import FollowersComponent from './followers';
-import FollowingComponent from './following';
+import FollowersComponent from './components/personalProfileHeader/followers';
+import FollowingComponent from './components/personalProfileHeader/following';
 
 export {
     SettingsComponent,

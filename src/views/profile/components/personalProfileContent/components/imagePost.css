@@ -1,0 +1,45 @@
+.singleImage {
+    margin : 0 10px 10px 10px;
+    width: 250px;
+    position: relative;
+}
+
+.imgHover {
+    background-color: #000;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    margin: 0 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.imgHover h4{
+    color: #fff;
+}
+
+.imgHover:hover {
+    opacity: .4;
+}
+
+
+.imgHover span {
+    color: #fff;
+}
+
+@media screen and (max-width: 1020px) {
+    .singleImage {
+        width: 25vw;
+        margin: 0 1px 1px 1px;
+    }
+    .imgHover {
+        width: 25vw;
+        height: 25vw;
+        margin: 0 1px 1px 1px;
+    }
+}

@@ -25,7 +25,7 @@ function AppContainer() {
 
 function App() {
     return (
-        <div style={{height: "100%"}}>
+        <div>
             <HeaderComponent/>
             <AppContainer/>
             <FooterComponent/>

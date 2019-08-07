@@ -20,12 +20,6 @@
     margin-top: 10px;
 }
 
-.signUpContainer {
-    max-width: 350px;
-    width: 100%;
-    background-color: #fff;
-}
-
 .title {
     font-family: "DK Uncle Edward";
     font-size: 65px;
@@ -49,7 +43,7 @@
     width: 30%;
 }
 
-.signUpCont{
+.signInCont{
     max-width: 350px;
     width: 100%;
     background-color: #fff;
@@ -59,4 +53,3 @@
     border: 2px solid #e6e6e6;
     border-radius: 1px;
     margin-top: 10px;}
-

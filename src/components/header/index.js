@@ -1,5 +1,5 @@
 import React from 'react';
-import {Toolbar, InputBase, IconButton} from '@material-ui/core'
+import {Toolbar, InputBase, IconButton,Button} from '@material-ui/core'
 import './header.css';
 import logo from './../../assets/coworking.png';
 import {fade, makeStyles} from '@material-ui/core/styles';
@@ -16,13 +16,6 @@ const useStyles = makeStyles(theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
-    },
-    title: {
-        flexGrow: 1,
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-        },
     },
     search: {
         position: 'relative',
@@ -71,7 +64,9 @@ export default function HeaderComponent() {
 
     return <div>
         <Toolbar className="headerCompContainer">
-            <img src={logo} height={60} width={60} alt={"logo"}/>
+            <Button href={'/'}>
+                <img src={logo} height={60} width={60} alt={"logo"}/>
+            </Button>
             <div className={classes.search}>
                 <div className={classes.searchIcon}>
                     <SearchIcon/>

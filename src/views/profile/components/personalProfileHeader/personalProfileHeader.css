@@ -1,0 +1,99 @@
+.profileHeaderContainer {
+    display: flex;
+    padding-top: 50px;
+    padding-bottom: 25px;
+    width: 910px;
+}
+
+.profileImageContainer {
+    width: 150px;
+    height: 150px;
+    margin: 0px 100px 10px 100px;
+}
+
+
+.profileImageContent {
+    width: 20vw;
+    height: 20vw;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10vw;
+}
+
+
+.textStylePH {
+    color: #282c34;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.editButton span {
+    font-weight: bold;
+    font-size: 11px;
+}
+
+
+
+.subInfoCont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+
+.stats{
+    color: #282c34;
+    font-weight: bold;
+    font-family: "Advent Pro";
+
+}
+
+@media screen and (max-width: 599px) {
+    .profileImageContainer {
+        width: 80px;
+        height: 80px;
+    }
+    .textStylePH {
+        margin-right: 10px;
+        font-size: 12px;
+    }
+    .editButton span {
+        font-size: 8px;
+    }
+    .stats{
+        font-weight: bold;
+        font-size: 12px;
+        font-family: "Advent Pro";
+
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .profileImageContainer {
+        margin: 0px 10vw 10px 10vw;
+    }
+    .profileHeaderContainer {
+        width: 90vw;
+        margin: 10px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+
+    .profileImageContent {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 75px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .profileImageContent {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50px;
+    }
+}

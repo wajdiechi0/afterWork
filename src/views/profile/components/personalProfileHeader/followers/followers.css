@@ -1,0 +1,35 @@
+.fContainer {
+    width: 400px;
+    max-height: 400px;
+    padding: 10px;
+}
+
+.dialogTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.followersCont {
+    display: flex;
+    flex-direction: column;
+}
+
+.singleF {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fName {
+    font-weight: bold;
+
+}
+
+@media screen and (max-width: 599px) {
+    .fContainer {
+        width: 100vw;
+        max-height: 100vw;
+    }
+}

@@ -1,0 +1,46 @@
+
+.cardC {
+    width: 450px;
+    margin: 10px 10px 30px 10px;
+
+}
+
+.expand {
+}
+
+.cardHeaderCreateP {
+    background-color: #e2e2e2;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 40px;
+}
+
+.cardActionsCreateP {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #e2e2e2;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: 5px;
+}
+
+.imageStyleC{
+    height: 450px;
+    width: 450px;
+    margin-top: 15px;
+}
+
+@media screen and (max-width: 599px){
+    .cardC{
+        width:90vw;
+    }
+    .imageStyleC{
+        height: 90vw;
+        width: 90vw;
+    }
+    h3{
+        font-size: 13px;
+    }
+}
+

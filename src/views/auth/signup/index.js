@@ -62,7 +62,7 @@ export default class SignUpComponent extends Component {
                 <p style={{color: "#9d9d9d", fontWeight: 'bold', width:'70%'}}>By signing up, you agree to our Terms,
                     Data Policy and Cookies Policy</p>
             </div>
-            <div className={'signUpCont'}>
+            <div className={'signInCont'}>
                 <p>You have an account ?</p>
                 <Button href={'/login'} style={{fontWeight: 'bold', color: '#3897f0'}}>
                     Sign In !
