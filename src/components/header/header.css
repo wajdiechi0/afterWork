@@ -18,6 +18,15 @@
     }
 }
 
+.suggestions{
+    border-radius: 10px;
+    z-index: 99;
+    width: 280px;
+    margin-top: 5px;
+    background-color: white;
+    position: absolute;
+}
+
 /*for SM*/
 @media screen and (min-width: 600px) and (max-width: 959px) {
     .footerCompContainer {
@@ -39,3 +48,4 @@
 @media screen and (min-width: 1920px) and (max-width: 5000px) {
 
 }
+

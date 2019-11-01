@@ -38,7 +38,7 @@ export default class ImagePost extends Component {
                     </div>
                 </div>
             </IconButton>
-                <PostComponent open={this.state.open} image={this.props.image} desc={this.props.desc} close={this.closePost} likes={this.props.likes} />
+                <PostComponent user={this.props.user} open={this.state.open} image={this.props.image} desc={this.props.desc} close={this.closePost} likes={this.props.likes} />
             </div>
         );
     }

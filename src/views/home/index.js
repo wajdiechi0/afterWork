@@ -1,6 +1,6 @@
 import FeedComponent from './feed';
-import DiscoverComponent from './discover'
+import NotFoundComponent from './notFound';
 export {
     FeedComponent,
-    DiscoverComponent
+    NotFoundComponent
 };

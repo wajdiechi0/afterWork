@@ -1,0 +1,40 @@
+.pContainer {
+    width: 500px;
+    padding-bottom: 20px;
+}
+
+.imagePopup{
+    width: 250px;
+    height: 250px;
+}
+
+.postInfoCont{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.verticalLine{
+    height: 250px;
+    width: 1px;
+    background-color: #cdcdcd;
+    margin:10px;
+}
+
+.subInfo{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.likesComments{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: auto;
+}
+@media screen and (max-width: 599px) {
+    .pContainer {
+        width: 100vw;
+    }
+}

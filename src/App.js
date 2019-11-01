@@ -1,24 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {FooterComponent, HeaderComponent} from "./components";
+import 'firebase/auth';
+import {HeaderComponent} from "./components";
 import {Router} from "@reach/router";
 import {LoginComponent, SignUpComponent, ResetPasswordComponent} from "./views/auth";
-import {FeedComponent, DiscoverComponent} from "./views/home";
-import {SettingsComponent, PersonalProfileCompenent, FollowersComponent, FollowingComponent} from './views/profile';
+import {FeedComponent,NotFoundComponent} from "./views/home";
+import {PersonalProfileCompenent,UserProfileCompenent} from './views/profile';
 
-
-function AppContainer() {
+function AppContainer(props) {
     return (
         <Router>
             <FeedComponent path={'/'}/>
             <LoginComponent path={'login'}/>
-            <SettingsComponent path={'/settings'}/>
             <ResetPasswordComponent path={'resetpassword'}/>
             <SignUpComponent path={'/signup'}/>
             <PersonalProfileCompenent path={'/profile'}/>
-            <FollowingComponent path={'/profile/following'}/>
-            <FollowersComponent path={'/profile/followers'}/>
-            <DiscoverComponent path={'/discover'}/>
+            <UserProfileCompenent path={'/:username'}/>
+            <NotFoundComponent path={'/404'}/>
         </Router>
     );
 }
@@ -28,7 +26,6 @@ function App() {
         <div>
             <HeaderComponent/>
             <AppContainer/>
-            <FooterComponent/>
         </div>
     );
 }

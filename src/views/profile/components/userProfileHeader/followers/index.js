@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import './followers.css';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,6 +10,7 @@ import Firebase from './../../../../../services/firebase';
 
 const firestore = Firebase.firestore();
 const storage = Firebase.storage();
+const fireAuth = Firebase.auth();
 
 export default function FollowersComponent(props) {
 
@@ -21,24 +22,35 @@ export default function FollowersComponent(props) {
     const [reload, changeReload] = useState(Date());
 
     useEffect(() => {
-        firestore.collection('Users').doc(localStorage.getItem('userID')).get().then(currentUser => {
-            currentUser.data().followers.forEach(userID => {
-                let followersID = [];
-                followers.forEach(item => {
-                    followersID = [...followersID, item.id]
-                });
-                if (!followersID.includes(userID))
-                    firestore.collection('Users').doc(userID).get().then(user => {
-                        followCheck[userID] = currentUser.data().following.includes(userID);
-                        changeFollowCheck(followCheck);
-                        if (currentUser.data().followers.length > followers.length) {
-                            addFollowers([...followers, user]);
+        fireAuth.onAuthStateChanged((user) => {
+            if (user)
+                firestore.collection('Users').get().then(users => {
+                    users.docs.forEach(user => {
+                        if (user.data().username === props.username) {
+                            const userIDs = user.id;
+                            firestore.collection('Users').doc(userIDs).get().then(currentUser => {
+                                currentUser.data().followers.forEach(userID => {
+                                    let followersID = [];
+                                    followers.forEach(item => {
+                                        followersID = [...followersID, item.id]
+                                    });
+                                    if (!followersID.includes(userID))
+                                        firestore.collection('Users').doc(userID).get().then(user => {
+                                            firestore.collection('Users').doc(localStorage.getItem('userID')).get().then(personalUser => {
+                                                followCheck[userID] = personalUser.data().following.includes(userID);
+                                            });
+                                            changeFollowCheck(followCheck);
+                                            if (currentUser.data().followers.length > followers.length) {
+                                                addFollowers([...followers, user]);
+                                            }
+                                        })
+                                })
+                            })
                         }
-                    })
-            })
-        })
+                    });
+                });
+        });
     });
-
     try {
         storage.ref('profilePic/defaultPic.png').getDownloadURL().then(url => {
             changePic(url);
@@ -87,6 +99,7 @@ export default function FollowersComponent(props) {
             newFollowCheck[item.id] = true;
             changeReload(Date());
             changeFollowCheck(newFollowCheck);
+
         })
     };
     return <div>

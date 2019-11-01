@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import './followers.css';
+import React, {Component, useEffect, useState} from 'react';
+import './following.css';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
@@ -10,35 +10,47 @@ import Firebase from './../../../../../services/firebase';
 
 const firestore = Firebase.firestore();
 const storage = Firebase.storage();
-
-export default function FollowersComponent(props) {
+const fireAuth = Firebase.auth();
+export default function FollowingComponent(props) {
 
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('xs'));
-    const [followers, addFollowers] = useState([]);
+    const [following, addFollowing] = useState([]);
     const [defaultPic, changePic] = useState('');
     const [followCheck, changeFollowCheck] = useState([]);
     const [reload, changeReload] = useState(Date());
 
     useEffect(() => {
-        firestore.collection('Users').doc(localStorage.getItem('userID')).get().then(currentUser => {
-            currentUser.data().followers.forEach(userID => {
-                let followersID = [];
-                followers.forEach(item => {
-                    followersID = [...followersID, item.id]
-                });
-                if (!followersID.includes(userID))
-                    firestore.collection('Users').doc(userID).get().then(user => {
-                        followCheck[userID] = currentUser.data().following.includes(userID);
-                        changeFollowCheck(followCheck);
-                        if (currentUser.data().followers.length > followers.length) {
-                            addFollowers([...followers, user]);
+        fireAuth.onAuthStateChanged((user) => {
+            if (user)
+                firestore.collection('Users').get().then(users => {
+                    users.docs.forEach(user => {
+                        if (user.data().username === props.username) {
+                            const userIDs = user.id;
+                            firestore.collection('Users').doc(userIDs).get().then(currentUser => {
+                                currentUser.data().following.map(userID => {
+                                    let followingID = [];
+                                    following.forEach(item => {
+                                        followingID = [...followingID, item.id]
+                                    });
+                                    if (!followingID.includes(userID))
+                                        firestore.collection('Users').doc(userID).get().then(user => {
+                                            firestore.collection('Users').doc(localStorage.getItem('userID')).get().then(personalUser => {
+                                                followCheck[userID] = personalUser.data().following.includes(userID);
+                                            })
+                                            changeFollowCheck(followCheck);
+                                            if (currentUser.data().following.length > following.length) {
+                                                addFollowing([...following, user]);
+                                            }
+                                        })
+                                })
+                            })
                         }
-                    })
-            })
-        })
-    });
+                    });
+                });
+        });
 
+    });
     try {
         storage.ref('profilePic/defaultPic.png').getDownloadURL().then(url => {
             changePic(url);
@@ -46,6 +58,7 @@ export default function FollowersComponent(props) {
     } catch (e) {
         console.log(e)
     }
+
 
     const unfollow = (item) => {
         const newFollowers = item.data().followers.filter(follow => {
@@ -64,31 +77,39 @@ export default function FollowersComponent(props) {
                     following: newFollowing,
                     followingN: currentUser.data().followingN - 1
                 }).then(() => {
-                    const newFollowCheck = followCheck;
-                    newFollowCheck[item.id] = false;
-                    changeReload(Date());
-                    changeFollowCheck(newFollowCheck);
+                    const newTable = following.filter((follow) => {
+                        return follow !== item
+                    });
+                    addFollowing(newTable);
                 })
         })
     };
 
     const follow = (item) => {
-        firestore.collection('Users').doc(item.id).update({
-            followers: [...item.data().followers, localStorage.getItem('userID')],
-            followersN: item.data().followersN + 1
+        firestore.collection('Users').get().then(users => {
+            users.docs.forEach(user => {
+                if (user.data().username === this.props.username) {
+                    const userIDs = user.id;
+                    firestore.collection('Users').doc(item.id).update({
+                        followers: [...item.data().followers, userIDs],
+                        followersN: item.data().followersN + 1
+                    });
+                    firestore.collection('Users').doc(userIDs).get().then(currentUser => {
+                        firestore.collection('Users').doc(userIDs).update({
+                            following: [...currentUser.data().following, item.id],
+                            followingN: currentUser.data().followingN + 1
+                        })
+                    }).then(() => {
+                        const newFollowCheck = followCheck;
+                        newFollowCheck[item.id] = true;
+                        changeReload(Date());
+                        changeFollowCheck(newFollowCheck);
+                    })
+                }
+            });
         });
-        firestore.collection('Users').doc(localStorage.getItem('userID')).get().then(currentUser => {
-            firestore.collection('Users').doc(localStorage.getItem('userID')).update({
-                following: [...currentUser.data().following, item.id],
-                followingN: currentUser.data().followingN + 1
-            })
-        }).then(() => {
-            const newFollowCheck = followCheck;
-            newFollowCheck[item.id] = true;
-            changeReload(Date());
-            changeFollowCheck(newFollowCheck);
-        })
     };
+
     return <div>
         <Dialog
             fullScreen={fullScreen}
@@ -98,16 +119,16 @@ export default function FollowersComponent(props) {
             <div className={'fContainer'}>
                 <div className={'dialogTitle'}>
                     <h3 style={{marginLeft: 'auto'}}>
-                        Followers
+                        Following
                     </h3>
                     <IconButton style={{marginLeft: 'auto'}} onClick={props.close}>
                         <Close/>
                     </IconButton>
                 </div>
                 <div style={{backgroundColor: '#9d9d9d', width: '100%', height: 0.7, opacity: 0.5}}/>
-                <div className={'followersCont'}>
+                <div className={'followingCont'}>
                     {
-                        followers.map((item, index) => (
+                        following.map((item, index) => (
                             <div className={'singleF'}>
                                 <IconButton href={'/' + item.data().username}>
                                     <img
@@ -137,5 +158,6 @@ export default function FollowersComponent(props) {
             </div>
         </Dialog>
     </div>
+
 
 }

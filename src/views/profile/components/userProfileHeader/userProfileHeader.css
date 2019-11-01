@@ -1,10 +1,8 @@
-.userProfileHeaderContainer {
+.profileHeaderContainer {
     display: flex;
     padding-top: 50px;
     padding-bottom: 25px;
     width: 910px;
-    width: 100%;
-    justify-content: center;
 }
 
 .profileImageContainer {

@@ -1,25 +1,35 @@
 import React, {Component} from 'react';
 import './personalProfileContent.css';
 import ImagePost from './components/imagePost';
-import image1 from './../../../../assets/1.jpg';
-import image2 from './../../../../assets/2.jpg';
-import image3 from './../../../../assets/3.jpg';
-import image4 from './../../../../assets/4.jpg';
-import image5 from './../../../../assets/5.jpg';
-import image6 from './../../../../assets/6.jpg';
+import Firebase from "../../../../services/firebase";
 
-const imagesArray = [image1, image2, image3, image4, image5, image6, image1];
+const fireStore = Firebase.firestore();
+
 export default class PersonalProfileContent extends Component {
+    state={
+        posts:[]
+    };
     render() {
         return <div className="profCntnt">
             <div className={'postsContainer'}>
                 {
-                    imagesArray.map((item, index) => (
-                              <ImagePost image={item} key={index}/>
+                    this.state.posts.map((item, index) => (
+                              <ImagePost image={item.image} desc={item.desc} key={index} likes={item.likes} comments={item.comments}/>
 
                     ))
                 }
             </div>
         </div>
+    }
+
+    componentDidMount() {
+        fireStore.collection('Posts').get().then(data=>{
+            data.docs.forEach(value => {
+                if (value.data().user === localStorage.getItem('userID'))
+                this.setState({
+                    posts:[value.data(),...this.state.posts]
+                });
+            })
+        })
     }
 };

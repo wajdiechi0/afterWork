@@ -1,4 +1,4 @@
-.fContainer {
+.nContainer {
     width: 400px;
     max-height: 400px;
     padding: 10px;
@@ -10,20 +10,27 @@
     justify-content: center;
 }
 
-.followersCont {
+.notiCont {
     display: flex;
     flex-direction: column;
 }
 
-.singleF {
+.singleN {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    margin-bottom: 5px;
 }
 
 .fName {
     font-weight: bold;
+}
+
+.namdAndDesc {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
 }
 
 @media screen and (max-width: 599px) {
